@@ -8,30 +8,38 @@ public class Main {
         notebooks.add(new Notebook("Brand 2", "Model 2 Чёрный", 16, 1000, 11, 2));
         notebooks.add(new Notebook("Brand 3", "Model 3 Белый", 8, 1000, 8, 1));
         notebooks.add(new Notebook("Brand 4", "Model 4 Чёрный", 16, 500, 11, 2));
-        Scanner scanner = new Scanner(System.in);
+        while (true){
         System.out.println("1 - ОЗУ");
         System.out.println("2 - Объем ЖД");
         System.out.println("3 - Операционная система");
         System.out.println("4 - Цвет (1 - белый , 2 - чёрный)");
         System.out.println("0 - Выход");
         System.out.println("Введите цифру, соответствующую необходимому критерию:");
-        int criterion = scanner.nextInt();
+        int criterion = GetInt();
                 // Запрос минимального значения критерия фильтрации
         if (criterion == 0){
-                System.exit(0);    
-                }
-                System.out.println("Введите минимальное значение для выбранного критерия:");
-                int minValue = scanner.nextInt();
-                scanner.close();
-                // Фильтрация и вывод ноутбуков
-                notebooks = filterNotebooks(notebooks, criterion, minValue);
-                System.out.println("Результаты фильтрации:");
-                for (Notebook notebook : notebooks) {
-                    System.out.println(notebook.getBrand() + " " + notebook.getModel());
-                }
-            
+            System.exit(0);    
+        }
+        System.out.println("Введите минимальное значение для выбранного критерия:");
+        int minValue = GetInt();
+        notebooks = filterNotebooks(notebooks, criterion, minValue);
+        System.out.println("Результаты фильтрации:");
+        for (Notebook notebook : notebooks) {
+            System.out.println(notebook.getBrand() + " " + notebook.getModel());
+        }
     }
-
+    }
+    public static int GetInt(){
+        int Value = 0;
+        try {
+            Scanner scanner = new Scanner(System.in);
+            Value = scanner.nextInt();
+            return Value;    
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        return Value; 
+    }
     public static Set<Notebook> filterNotebooks(Set<Notebook> notebooks, int criterion, int minValue) {
         Set<Notebook> filteredNotebooks = new HashSet<>();
         for (Notebook notebook : notebooks) {
